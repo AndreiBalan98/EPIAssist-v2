@@ -6,8 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Entity
-@Table(name = "users")
-public class User {
+public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,14 +14,4 @@ public class User {
 
     @Setter
     private String name;
-
-    @Setter
-    private String email;
-
-    public User() {}
-
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
 }
