@@ -25,10 +25,10 @@ public class DocumentController {
         return documentService.getDocumentsNames();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{name}")
     public DocumentContentDto getDocumentContent(
-            @PathVariable Long id
+            @PathVariable String name
     ) {
-        return documentService.getDocumentById(id);
+        return documentService.getDocumentByName(name);
     }
 }
