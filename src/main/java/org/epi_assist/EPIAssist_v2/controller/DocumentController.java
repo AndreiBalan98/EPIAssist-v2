@@ -1,12 +1,13 @@
 package org.epi_assist.EPIAssist_v2.controller;
 
 import org.epi_assist.EPIAssist_v2.dto.DocumentContentDto;
-import org.epi_assist.EPIAssist_v2.dto.DocumentDto;
 import org.epi_assist.EPIAssist_v2.dto.DocumentNameDto;
 import org.epi_assist.EPIAssist_v2.service.DocumentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,11 +32,12 @@ public class DocumentController {
         return documentService.getDocumentByName(name);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) //201
+    @PostMapping(consumes = "multipart/form-data") //just for strict validation
+    @ResponseStatus(HttpStatus.CREATED)
     public DocumentNameDto postDocument(
-            @RequestBody DocumentDto documentDto
-    ) {
-        return documentService.postDocument(documentDto);
+            @RequestParam String name,
+            @RequestParam MultipartFile file
+    ) throws IOException {
+        return documentService.postDocument(name, file);
     }
 }
