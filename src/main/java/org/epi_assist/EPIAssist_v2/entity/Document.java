@@ -3,8 +3,11 @@ package org.epi_assist.EPIAssist_v2.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.epi_assist.EPIAssist_v2.dto.TocSectionDto;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -23,6 +26,6 @@ public class Document {
     private String markdownContent;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "json_content")
-    private String jsonContent;
+    @Column(name = "toc", columnDefinition = "jsonb")
+    private List<TocSectionDto> toc;
 }

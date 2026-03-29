@@ -2,6 +2,7 @@ package org.epi_assist.EPIAssist_v2.controller;
 
 import org.epi_assist.EPIAssist_v2.dto.DocumentContentDto;
 import org.epi_assist.EPIAssist_v2.dto.DocumentNameDto;
+import org.epi_assist.EPIAssist_v2.dto.TocSectionDto;
 import org.epi_assist.EPIAssist_v2.service.DocumentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,13 @@ public class DocumentController {
             @PathVariable String name
     ) {
         return documentService.getDocumentByName(name);
+    }
+
+    @GetMapping("/toc/{name}")
+    public List<TocSectionDto> getDocumentToc(
+            @PathVariable String name
+    ) {
+        return documentService.getDocumentToc(name);
     }
 
     @PostMapping(consumes = "multipart/form-data") //just for strict validation
