@@ -73,47 +73,49 @@ public class DocumentService {
 
     private List<Chunk> extractChunks(String documentName, String content) {
         List<Chunk> chunks = new ArrayList<>();
-        String[] lines = content.split("\n");
+        String[] lines = content.split("\r\n", -1);
         String[] headingHierarchy = new String[10];
         StringBuilder currentContent = new StringBuilder();
         String currentUrl = null;
 
         for (String line : lines) {
-            String trimmed = line.stripTrailing();
-            if (trimmed.startsWith("#")) {
-                if (currentUrl != null && !currentContent.toString().isBlank()) {
+            if (line.startsWith("#")) {
+                if (currentUrl != null) {
                     Chunk chunk = new Chunk();
                     chunk.setUrl(currentUrl);
-                    chunk.setContent(currentContent.toString().strip());
+                    chunk.setContent(currentContent.toString());
                     chunks.add(chunk);
                 }
 
                 int level = 0;
-                while (level < trimmed.length() && trimmed.charAt(level) == '#') level++;
-                String title = trimmed.substring(level).strip();
+                while (level < line.length() && line.charAt(level) == '#') level++;
+
+                int i = level;
+                while (i < line.length() && line.charAt(i) == ' ') i++;
+                String title = line.substring(i);
 
                 headingHierarchy[level - 1] = title;
-                for (int i = level; i < headingHierarchy.length; i++) {
-                    headingHierarchy[i] = null;
+                for (int j = level; j < headingHierarchy.length; j++) {
+                    headingHierarchy[j] = null;
                 }
 
                 StringBuilder url = new StringBuilder(documentName);
-                for (int i = 0; i < level; i++) {
-                    url.append("/").append(headingHierarchy[i]);
+                for (int j = 0; j < level; j++) {
+                    url.append("/").append(headingHierarchy[j]);
                 }
                 currentUrl = url.toString();
                 currentContent = new StringBuilder();
             } else {
                 if (currentUrl != null) {
-                    currentContent.append(trimmed).append("\n");
+                    currentContent.append(line).append("\r\n");
                 }
             }
         }
 
-        if (currentUrl != null && !currentContent.toString().isBlank()) {
+        if (currentUrl != null) {
             Chunk chunk = new Chunk();
             chunk.setUrl(currentUrl);
-            chunk.setContent(currentContent.toString().strip());
+            chunk.setContent(currentContent.toString());
             chunks.add(chunk);
         }
 
