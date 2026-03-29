@@ -1,4 +1,4 @@
 package org.epi_assist.EPIAssist_v2.dto;
 
-public record EmbeddingRequestDto(String content) {
+public record EmbeddingRequestDto(String text) {
 }
