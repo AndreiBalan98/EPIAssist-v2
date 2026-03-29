@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ChunkRepository extends JpaRepository<Chunk, Long> {
     List<Chunk> findByUrlStartingWith(String prefix);
+    void deleteByUrlStartingWith(String prefix);
 }

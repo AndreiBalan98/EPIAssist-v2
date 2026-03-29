@@ -40,6 +40,12 @@ public class DocumentController {
         return documentService.getDocumentToc(name);
     }
 
+    @DeleteMapping("/{name}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteDocument(@PathVariable String name) {
+        documentService.deleteDocument(name);
+    }
+
     @PostMapping(consumes = "multipart/form-data") //just for strict validation
     @ResponseStatus(HttpStatus.CREATED)
     public DocumentNameDto postDocument(
