@@ -23,6 +23,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/epiassist_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: cosmonet
+      PYTHON_SERVICE_URL: http://host.docker.internal:8000
     depends_on:
       db:
         condition: service_healthy
