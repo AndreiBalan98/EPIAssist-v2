@@ -31,7 +31,7 @@ EPIAssist-v2 is a Spring Boot REST API that powers a **RAG (Retrieval-Augmented 
 - Lombok
 - External AI/embedding service (Python, port 8000)
 
-**Server port:** `8081`
+**Server port:** `8080`
 
 ---
 
@@ -74,7 +74,7 @@ PostgreSQL (epiassist_db)
 spring.application.name=EPIAssist-v2
 spring.datasource.url=jdbc:postgresql://localhost:5432/epiassist_db
 spring.datasource.username=postgres
-spring.datasource.password=cosmonet
+spring.datasource.password=<your_password>
 spring.jpa.hibernate.ddl-auto=update
 server.port=8081
 ```
