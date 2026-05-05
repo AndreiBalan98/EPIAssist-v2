@@ -80,7 +80,7 @@ public class DocumentService {
 
     private List<Chunk> extractChunks(String documentName, String content) {
         List<Chunk> chunks = new ArrayList<>();
-        String[] lines = content.split("\n\n", -1);
+        String[] lines = content.split("\\r?\\n", -1);
         String[] headingHierarchy = new String[10];
         StringBuilder currentContent = new StringBuilder();
         String currentUrl = null;
